@@ -3,6 +3,8 @@ Keras implementation of "BiO-Net: Learning Recurrent Bi-directional Connections 
 
 Paper: https://arxiv.org/abs/2007.00243
 
+![BiO-Net](./images/network.png)
+
 ## Notes
 
 *code coming soon.*
