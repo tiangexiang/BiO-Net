@@ -1,5 +1,5 @@
 # BiO-Net
-Keras implementation of "BiO-Net: Learning Recurrent Bi-directional Connections for Encoder-Decoder Architecture"
+Keras implementation of "BiO-Net: Learning Recurrent Bi-directional Connections for Encoder-Decoder Architecture", MICCAI 2020
 
 Paper: https://arxiv.org/abs/2007.00243
 
