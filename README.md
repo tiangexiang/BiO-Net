@@ -16,7 +16,7 @@ If you find this repo useful in your work or research, please cite:
 ```
 @inproceedings{xiang2020bionet,
   title={BiO-Net: Learning Recurrent Bi-directional Connections for Encoder-Decoder Architecture},
-  author={Tiange Xiang and Chaoyi Zhang and Dongnan Liu and Yang Song and Heng Huang and Weidong Cai},
+  author={Xiang, Tiange and Zhang, Chaoyi and Liu, Dongnan and Song, Yang and Huang, Heng and Cai, Weidong},
   booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI)},
   month={October},
   year={2020},
