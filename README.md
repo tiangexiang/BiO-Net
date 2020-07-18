@@ -12,6 +12,8 @@ Paper: https://arxiv.org/abs/2007.00243
 * PIL >= 7.0.0
 * keras >= 2.1.5
 
+*NOTE:* The repo has been sucessfully tested on a GeForce RTX 2080 GPU with CUDA=10.1 and driver=435.21.
+
 ## Data
 
 **MoNuSeg**
