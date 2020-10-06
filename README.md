@@ -55,12 +55,13 @@ python3 train.py --evaluate_only --valid_data PATH_TO_VALID_DATA_ROOT --model_pa
 If you find this repo useful in your work or research, please cite:
 
 ```
-@inproceedings{xiang2020bionet,
+@inproceedings{xiang2020bio,
   title={BiO-Net: Learning Recurrent Bi-directional Connections for Encoder-Decoder Architecture},
   author={Xiang, Tiange and Zhang, Chaoyi and Liu, Dongnan and Song, Yang and Huang, Heng and Cai, Weidong},
-  booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI)},
-  month={October},
+  booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention},
+  pages={74--84},
   year={2020},
+  organization={Springer}
 }
 ```
 
