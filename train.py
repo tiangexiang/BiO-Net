@@ -43,7 +43,7 @@ def train(args, train_data, val_data):
 
     #augmentation
     train_gen = get_augmented(
-    x_train, y_train, batch_size=args.batch,
+    x_train, y_train, batch_size=args.batch_size,
     data_gen_args = dict(
         rotation_range=15.,
         width_shift_range=0.05,
