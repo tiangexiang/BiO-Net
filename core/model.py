@@ -12,15 +12,15 @@ class BiONet():
     
     def __init__(self,
                  input_shape,
-                 num_classes=1,
-                 iterations=2,
-                 multiplier=1.0,
+                 num_classes=1,  # 输出的类别个数？（对应最后一个卷积的输出通道数）
+                 iterations=2,  # 消融实验中的t
+                 multiplier=1.0,  # 消融实验中的*n
                  activation='relu',
                  kernel_initializer='he_normal',
                  padding='same',
                  kernel_size=(3,3),
-                 num_layers=4,
-                 integrate=False):
+                 num_layers=4,  # 消融实验中的l
+                 integrate=False):  # integrate对应消融实验INT参数
         self.num_layers = num_layers
         self.input_shape = input_shape
         self.num_classes = num_classes
@@ -106,7 +106,7 @@ class BiONet():
                 else:
                     x = Concatenate()([x,x])  # 如果back_layer不存在则自复制，否则和后面decoder传回来的数据连接
                     
-                x = self.conv_block(x, self.bachnorm_momentum, conv = conv_layers[3*l])
+                x = self.conv_block(x, self.bachnorm_momentum, conv = conv_layers[3*l])  # 显然，Conv块使用了与l无关的块，也就是重用的块，但是self.conv_block创建时会重新创建一个batch_norm块
                 x = self.conv_block(x, self.bachnorm_momentum, conv = conv_layers[3*l+1])
                 down_layers.append(x)  # 对应的Encoder块中的前两个CONV
                 x = self.conv_block(x, self.bachnorm_momentum, conv = conv_layers[3*l+2])
@@ -117,18 +117,18 @@ class BiONet():
 
             x = self.conv_block(x, self.bachnorm_momentum, conv=mid_layers[0])
             x = self.conv_block(x, self.bachnorm_momentum, conv=mid_layers[1])
-            x = self.conv_block(x, self.bachnorm_momentum, conv=mid_layers[2])
+            x = self.conv_block(x, self.bachnorm_momentum, conv=mid_layers[2])  # 中间层三个卷积块
 
-            for l in range(self.num_layers):        
-                x = concatenate([x, down_layers[-1-l]])  
+            for l in range(self.num_layers):  # 和Encoder层同样数量的Decoder层
+                x = concatenate([x, down_layers[-1-l]])  # 从Encoder获得的输入
                 x = self.conv_block(x, self.bachnorm_momentum, conv = deconv_layers[3*l])
                 x = self.conv_block(x, self.bachnorm_momentum, conv = deconv_layers[3*l+1])
-                back_layers.append(x)
+                back_layers.append(x)  # deconv块组成的Decoder第一部分，对应前两个CONV块
                 
                 x = self.conv_block(x, self.bachnorm_momentum, conv = deconv_layers[3*l+2])
                 #integrate decoded features
                 if l == self.num_layers - 1 and self.integrate:
-                    collection.append(x)
+                    collection.append(x)  # INT参数下的合并处理
         
         #to use integrate or not
         if self.integrate:
@@ -138,9 +138,9 @@ class BiONet():
             
         #the last stage block is not reusable
         x = self.conv_block(x, self.bachnorm_momentum, int(32*self.multiplier))
-        x = self.conv_block(x, self.bachnorm_momentum, int(32*self.multiplier))
+        x = self.conv_block(x, self.bachnorm_momentum, int(32*self.multiplier))  # 其实是倒数第二个卷积操作
 
-        outputs = Conv2D(self.num_classes, kernel_size=(1,1), strides=(1,1), activation='sigmoid', padding='valid') (x)       
+        outputs = Conv2D(self.num_classes, kernel_size=(1,1), strides=(1,1), activation='sigmoid', padding='valid') (x)  # 输出之前是一个Conv2d
 
         model = Model(inputs=[inputs], outputs=[outputs])
         
@@ -156,5 +156,5 @@ class BiONet():
             x = conv(x)
         else:
             x = Conv2D(filters, **self.conv_args)(x)
-        x = BatchNormalization(momentum=bachnorm_momentum)(x)
+        x = BatchNormalization(momentum=bachnorm_momentum)(x)  # 应该是每个Conv和Deconv都有一个BN块
         return x          
