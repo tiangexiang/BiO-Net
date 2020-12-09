@@ -54,12 +54,12 @@ class BiONet():
     #define reusable layers
     def define_layers(self):
         
-        multiplier = self.multiplier
+        multiplier = self.multiplier  # 这句是不是完全没有意义？？？？？？
         
         #reuse feature collections
         conv_layers = []
         deconv_layers = []
-        mid_layers = []
+        mid_layers = []  # 这应该指的是图中最后生成语义向量的那个指针，也就是将最后一个Encoder输出内容转换为语义向量的中间层
         
         mid_layers.append(Conv2D(int(self.filters_list[self.num_layers] * multiplier),**self.conv_args))
         mid_layers.append(Conv2D(int(self.filters_list[self.num_layers] * multiplier),**self.conv_args))
@@ -68,12 +68,12 @@ class BiONet():
         for l in range(self.num_layers):
             conv_layers.append(Conv2D(int(self.filters_list[l] * self.multiplier), **self.conv_args))
             conv_layers.append(Conv2D(int(self.filters_list[l] * self.multiplier), **self.conv_args))
-            conv_layers.append(Conv2D(int(self.filters_list[l+1] * self.multiplier), **self.conv_args))
+            conv_layers.append(Conv2D(int(self.filters_list[l+1] * self.multiplier), **self.conv_args))  # 默认状态下会有四个卷积层，最终会卷到512通道
 
         for l in range(self.num_layers):
             deconv_layers.append(Conv2D(int(self.filters_list[self.num_layers-1-l] * self.multiplier), **self.conv_args))
             deconv_layers.append(Conv2D(int(self.filters_list[self.num_layers-1-l] * self.multiplier), **self.conv_args))
-            deconv_layers.append(Conv2DTranspose(int(self.filters_list[self.num_layers-1-l] * self.multiplier), **self.convT_args))
+            deconv_layers.append(Conv2DTranspose(int(self.filters_list[self.num_layers-1-l] * self.multiplier), **self.convT_args))  # 最终会卷到32层，这也印证了对论文的理解，即图1中是三个反卷积（图1比此处默认的要少一层）
         
         return conv_layers, deconv_layers, mid_layers
         
@@ -86,7 +86,7 @@ class BiONet():
         x = self.conv_block(inputs, self.bachnorm_momentum, int(32*self.multiplier))
         shortcut = self.conv_block(x, self.bachnorm_momentum, int(32*self.multiplier))  
         x = self.conv_block(shortcut, self.bachnorm_momentum, int(32*self.multiplier))
-        x_in = MaxPooling2D(**self.maxpool_args)(x)
+        x_in = MaxPooling2D(**self.maxpool_args)(x)  # 这个shortcut有啥用吗？上下文没有再使用了，应该只是顺序执行运算的啊
 
         back_layers = []
         collection = []
@@ -97,20 +97,20 @@ class BiONet():
             #down layers to carry forward skip connections
             down_layers = []
 
-            for l in range(self.num_layers):
-                if l == 0:
+            for l in range(self.num_layers):  # 生成Encoder
+                if l == 0:  # 如果是循环第0次，整个O形部分输入的就是刚刚处理完的x_in，否则的话应该是从decoder过来的数据
                     x = x_in
 
                 if len(back_layers) != 0:
                     x = Concatenate()([x,back_layers[-1-l]])
                 else:
-                    x = Concatenate()([x,x])
+                    x = Concatenate()([x,x])  # 如果back_layer不存在则自复制，否则和后面decoder传回来的数据连接
                     
                 x = self.conv_block(x, self.bachnorm_momentum, conv = conv_layers[3*l])
                 x = self.conv_block(x, self.bachnorm_momentum, conv = conv_layers[3*l+1])
-                down_layers.append(x)
+                down_layers.append(x)  # 对应的Encoder块中的前两个CONV
                 x = self.conv_block(x, self.bachnorm_momentum, conv = conv_layers[3*l+2])
-                x = MaxPooling2D(**self.maxpool_args)(x)
+                x = MaxPooling2D(**self.maxpool_args)(x)  # 对应Encoder块中的最后一个DOWN
                 
             #back layers to carry backward skip connections, refresh in each inference iteration
             back_layers = []
