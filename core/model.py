@@ -104,7 +104,7 @@ class BiONet():
                 if len(back_layers) != 0:
                     x = Concatenate()([x,back_layers[-1-l]])
                 else:
-                    x = Concatenate()([x,x])  # 如果back_layer不存在则自复制，否则和后面decoder传回来的数据连接
+                    x = Concatenate()([x,x])  # 如果back_layer不存在则自复制，否则和后面decoder传回来的数据连接，同时也说明通道数其实是翻倍的
                     
                 x = self.conv_block(x, self.bachnorm_momentum, conv = conv_layers[3*l])  # 显然，Conv块使用了与l无关的块，也就是重用的块，但是self.conv_block创建时会重新创建一个batch_norm块
                 x = self.conv_block(x, self.bachnorm_momentum, conv = conv_layers[3*l+1])
