@@ -43,6 +43,7 @@ python3 train.py --epochs 300 --iter 3 --integrate --train_data PATH_TO_TRAIN_DA
 ```
 
 **Evaluate**
+
 *Save metrics and segmentations:*
 ```
 python3 train.py --evaluate_only --save_result --valid_data PATH_TO_VALID_DATA_ROOT --exp 1
