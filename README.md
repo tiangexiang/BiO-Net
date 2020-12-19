@@ -3,7 +3,7 @@ Keras implementation of "BiO-Net: Learning Recurrent Bi-directional Connections 
 
 Paper: https://arxiv.org/abs/2007.00243
 
-![BiO-Net](./images/network.png)
+![BiO-Net](./images/Abstract_153.png)
 
 ## Dependencies
 
@@ -11,6 +11,7 @@ Paper: https://arxiv.org/abs/2007.00243
 * tensorflow-gpu >= 1.14.0
 * PIL >= 7.0.0
 * keras >= 2.1.5
+* matplotlib >= 3.3.1
 
 *NOTE:* The repo has been sucessfully tested on a GeForce RTX 2080 GPU with CUDA=10.1 and driver=435.21.
 
@@ -42,13 +43,21 @@ python3 train.py --epochs 300 --iter 3 --integrate --train_data PATH_TO_TRAIN_DA
 ```
 
 **Evaluate**
+*Save metrics and segmentations:*
+```
+python3 train.py --evaluate_only --save_result --valid_data PATH_TO_VALID_DATA_ROOT --exp 1
+```
+*Print metrics only:*
 ```
 python3 train.py --evaluate_only --valid_data PATH_TO_VALID_DATA_ROOT --exp 1
 ```
+*NOTE:* ```--iter```,```--integrate```,```--multiplier``` need to be specidied on the above commands.
+
 or
 ```
 python3 train.py --evaluate_only --valid_data PATH_TO_VALID_DATA_ROOT --model_path PATH_TO_TRAINED_MODEL
 ```
+
 
 ## Citation
 

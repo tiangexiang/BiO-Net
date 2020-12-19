@@ -54,16 +54,14 @@ class BiONet():
     #define reusable layers
     def define_layers(self):
         
-        multiplier = self.multiplier
-        
         #reuse feature collections
         conv_layers = []
         deconv_layers = []
         mid_layers = []
         
-        mid_layers.append(Conv2D(int(self.filters_list[self.num_layers] * multiplier),**self.conv_args))
-        mid_layers.append(Conv2D(int(self.filters_list[self.num_layers] * multiplier),**self.conv_args))
-        mid_layers.append(Conv2DTranspose(int(self.filters_list[self.num_layers] * multiplier), **self.convT_args))
+        mid_layers.append(Conv2D(int(self.filters_list[self.num_layers] * self.multiplier),**self.conv_args))
+        mid_layers.append(Conv2D(int(self.filters_list[self.num_layers] * self.multiplier),**self.conv_args))
+        mid_layers.append(Conv2DTranspose(int(self.filters_list[self.num_layers] * self.multiplier), **self.convT_args))
 
         for l in range(self.num_layers):
             conv_layers.append(Conv2D(int(self.filters_list[l] * self.multiplier), **self.conv_args))
