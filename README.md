@@ -47,7 +47,7 @@ Thanks [W2Q3Q1](https://github.com/W2Q3Q1/BiO-Net) for contributions on some of 
 
 ## Usage  
 
-Uses ```--backend``` to switch between backends [Keras, Pytorch], default=Keras.
+Uses ```--backend``` to switch between backends [keras, pytorch], default=Keras.
 
 **Train**
 ```
