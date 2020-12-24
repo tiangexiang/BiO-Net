@@ -52,7 +52,7 @@ Uses ```--backend``` to switch between backends [keras, pytorch], default=Keras.
 **Train**
 ```
 python3 main.py --epochs 300 --iter 3 --integrate --train_data PATH_TO_TRAIN_DATA_ROOT \
-				 --valid_data PATH_TO_VALID_DATA_ROOT --exp 1 --backend YOUR_BACKEND
+		  --valid_data PATH_TO_VALID_DATA_ROOT --exp 1 --backend YOUR_BACKEND
 ```
 
 **Evaluate**
