@@ -1,18 +1,30 @@
 # BiO-Net
-Keras implementation of "BiO-Net: Learning Recurrent Bi-directional Connections for Encoder-Decoder Architecture", MICCAI 2020
+Official implementation of "BiO-Net: Learning Recurrent Bi-directional Connections for Encoder-Decoder Architecture", MICCAI 2020
 
 Paper: https://arxiv.org/abs/2007.00243
 
-![BiO-Net](./images/network.png)
+![BiO-Net](./images/Abstract_153.png)
+
+Thanks [W2Q3Q1](https://github.com/W2Q3Q1/BiO-Net) for contributions on some of the Pytorch codes!
 
 ## Dependencies
 
 * Python >= 3.6
-* tensorflow-gpu >= 1.14.0
 * PIL >= 7.0.0
+* matplotlib >= 3.3.1
+
+*Keras version* 
+* tensorflow-gpu >= 1.14.0 
 * keras >= 2.1.5
 
-*NOTE:* The repo has been sucessfully tested on a GeForce RTX 2080 GPU with CUDA=10.1 and driver=435.21.
+*Pytorch version*
+* tqdm >= 4.54.1
+* imgaug >= 0.4.0
+* torch >= 1.5.0
+* torchvision >= 0.6.0
+
+*NOTE1:* Keras version has been sucessfully tested on a GeForce RTX 2080 GPU with CUDA=10.1 and driver=435.21.
+*NOTE2:* You don't need all dependencies to run on a sole backend.
 
 ## Data
 
@@ -33,22 +45,33 @@ Paper: https://arxiv.org/abs/2007.00243
 
 *NOTE:* You can place your own dataloader under ```core/dataloader.py```.
 
-## Usage
+## Usage  
+
+Uses ```--backend``` to switch between backends [Keras, Pytorch], default=Keras.
 
 **Train**
 ```
-python3 train.py --epochs 300 --iter 3 --integrate --train_data PATH_TO_TRAIN_DATA_ROOT \
-				 --valid_data PATH_TO_VALID_DATA_ROOT --exp 1
+python3 main.py --epochs 300 --iter 3 --integrate --train_data PATH_TO_TRAIN_DATA_ROOT \
+				 --valid_data PATH_TO_VALID_DATA_ROOT --exp 1 --backend YOUR_BACKEND
 ```
 
 **Evaluate**
+
+*Save metrics and segmentations:*
 ```
-python3 train.py --evaluate_only --valid_data PATH_TO_VALID_DATA_ROOT --exp 1
+python3 main.py --evaluate_only --save_result --valid_data PATH_TO_VALID_DATA_ROOT --exp 1  --backend YOUR_BACKEND
 ```
+*Print metrics only:*
+```
+python3 main.py --evaluate_only --valid_data PATH_TO_VALID_DATA_ROOT --exp 1  --backend YOUR_BACKEND
+```
+*NOTE:* ```--iter```,```--integrate```,```--multiplier``` need to be specidied on the above commands.
+
 or
 ```
-python3 train.py --evaluate_only --valid_data PATH_TO_VALID_DATA_ROOT --model_path PATH_TO_TRAINED_MODEL
+python3 main.py --evaluate_only --valid_data PATH_TO_VALID_DATA_ROOT --model_path PATH_TO_TRAINED_MODEL  --backend YOUR_BACKEND
 ```
+
 
 ## Citation
 
