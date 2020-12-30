@@ -23,7 +23,7 @@ Thanks [W2Q3Q1](https://github.com/W2Q3Q1/BiO-Net) for contributions on some of 
 * torch >= 1.5.0
 * torchvision >= 0.6.0
 
-*NOTE1:* Keras version has been sucessfully tested on a GeForce RTX 2080 GPU with CUDA=10.1 and driver=435.21.
+*NOTE1:* Keras version has been sucessfully tested on a GeForce RTX 2080 GPU with CUDA=10.1 and driver=435.21.  
 *NOTE2:* You don't need all dependencies to run on a sole backend.
 
 ## Data
@@ -43,11 +43,10 @@ Thanks [W2Q3Q1](https://github.com/W2Q3Q1/BiO-Net) for contributions on some of 
 - Baidu Disk: https://pan.baidu.com/s/1zPWTYAEffX55c2eyb3cU0Q password: zsl1
 - Google Drive: https://drive.google.com/file/d/1RYY7vE0LAHSTQXvLx41civNRZvl-2hnJ/view?usp=sharing
 
-*NOTE:* You can place your own dataloader under ```core/dataloader.py```.
 
 ## Usage  
 
-Uses ```--backend``` to switch between backends [keras, pytorch], default=Keras.
+Use ```--backend``` to switch between backends [keras, pytorch], default=Keras.
 
 **Train**
 ```

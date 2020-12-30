@@ -37,7 +37,7 @@ def argparsing():
 def main(args, CORE):
     # path verification
     if args.model_path is not None:
-      if os.path.isfile(args.output_path):
+      if os.path.isfile(args.model_path):
         print('Model path has been verified.')
       else:
         print('Invalid model path! Please specify a valid model file. Program terminating...')

@@ -13,7 +13,7 @@ from .dataloader import BiONetDataset
 from .model import BiONet
 
 
-device = torch.device('cpu')
+device = torch.device('cuda:0')
 
 def train(args):
     # augmentations

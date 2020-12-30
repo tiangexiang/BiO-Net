@@ -4,8 +4,6 @@ from keras import backend as K
 import tensorflow as tf
 import keras
 
-from utils import get_augmented
-
 import numpy as np
 
 class BiONet(object):
@@ -29,8 +27,7 @@ class BiONet(object):
         self.multiplier = multiplier
         self.integrate = integrate
         
-        self.filters_list = [32,64,128,256,512]
-        self.filters_list = [int(f * multiplier) for f in self.filters_list]
+        self.filters_list = [int(32 * (2 ** i) * self.multiplier) for i in range(self.num_layers + 1)]
         self.bachnorm_momentum = 0.01
         
         self.conv_args = {
