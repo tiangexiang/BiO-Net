@@ -3,9 +3,11 @@ Official implementation of "BiO-Net: Learning Recurrent Bi-directional Connectio
 
 Paper: https://arxiv.org/abs/2007.00243
 
+**News (2021-06-26):** Check out our latest work[BiX-NAS](https://github.com/tiangexiang/BiX-NAS) that is to appear in MICCAI2021! BiX-Net Achieves on par performances to BiO-Net but with **34.9** times fewer parameters and **4.0** times fewer MACs!  
+
 ![BiO-Net](./images/Abstract_153.png)
 
-Thanks [W2Q3Q1](https://github.com/W2Q3Q1/BiO-Net) for contributions on some of the Pytorch codes!
+<!-- Thanks [W2Q3Q1](https://github.com/W2Q3Q1/BiO-Net) for contributions on some of the Pytorch codes! -->
 
 ## Dependencies
 
@@ -23,7 +25,7 @@ Thanks [W2Q3Q1](https://github.com/W2Q3Q1/BiO-Net) for contributions on some of 
 * torch >= 1.5.0
 * torchvision >= 0.6.0
 
-*NOTE1:* Keras version has been sucessfully tested on a GeForce RTX 2080 GPU with CUDA=10.1 and driver=435.21.  
+*NOTE1:* Both version have been sucessfully tested on a GeForce RTX 2080 GPU with CUDA=10.1 and driver=435.21.  
 *NOTE2:* You don't need all dependencies to run on a sole backend.
 
 ## Data
@@ -46,7 +48,7 @@ Thanks [W2Q3Q1](https://github.com/W2Q3Q1/BiO-Net) for contributions on some of 
 
 ## Usage  
 
-Use ```--backend``` to switch between backends [keras, pytorch], default=Keras.
+Use ```--backend``` to switch between backends [keras, pytorch], default=keras.
 
 **Train**
 ```
@@ -86,5 +88,3 @@ If you find this repo useful in your work or research, please cite:
   organization={Springer}
 }
 ```
-
-
